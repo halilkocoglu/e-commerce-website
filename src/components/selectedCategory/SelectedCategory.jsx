@@ -1,15 +1,23 @@
 import React from 'react'
+
+import "../productsList/productsList.css"
 import { useProductsContext } from '../../context/productsContext/ProductsContext';
 import { Link } from 'react-router-dom';
-import "./productsList.css"
-function Products() {
-    const { productsData } = useProductsContext();
+
+
+
+
+function SelectedCategory() {
+    const { productsData, category } = useProductsContext();
+    console.log(productsData);
   return (
-    <div>
+    <div className='main-container'>
         <div className='main-products'>
             {
             productsData.map(( product ) => {
+                console.log(product);
                 return(
+                    product.category === category &&
                     <div key={product.id} >
                         <div className='product-card'>
                             <Link to={`/products/category/${product.category}/${(product.title).replaceAll(" ","-")}`}>
@@ -39,4 +47,4 @@ function Products() {
   )
 }
 
-export default Products
+export default SelectedCategory
