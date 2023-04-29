@@ -8,21 +8,26 @@ import { Link } from 'react-router-dom';
 
 
 function SelectedCategory() {
-    const { productsData, category } = useProductsContext();
-    console.log(productsData);
+    const { productsData, category ,setProduct } = useProductsContext();
   return (
     <div className='main-container'>
         <div className='main-products'>
             {
             productsData.map(( product ) => {
-                console.log(product);
+                
                 return(
+                    
                     product.category === category &&
                     <div key={product.id} >
                         <div className='product-card'>
-                            <Link to={`/products/category/${product.category}/${(product.title).replaceAll(" ","-")}`}>
+                            <Link  
+                            onClick={ () => {
+                                setProduct(product.id);
+                                localStorage.setItem("Product",product.id);
+                            }}
+                            to={`/products/${product.id}`}>
                                 <div className='product-card-img'>
-                                    <img src= {product.images[0]} alt= {product.title} />
+                                    <img src= {product.thumbnail} alt= {product.title} />
                                 </div>
                                 <div className='product-card-title'>
                                     {product.title}
@@ -39,9 +44,10 @@ function SelectedCategory() {
                         </div>
                             
                     </div>
+                    )}
                 )
-            })
             }
+            
         </div>
     </div>
   )

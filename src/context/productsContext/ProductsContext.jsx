@@ -6,8 +6,10 @@ const ProductsContext = createContext();
 const ProductProvider =  ({children}) => {
     const [productCategories, setProductsCategories] = useState([]);
     const [productsData, setProductsData] = useState ([]);
-    const [category, setCategory] = useState ("");
-    // const [product, setProduct] = useState("");
+    const [category, setCategory] = useState (localStorage.getItem("Category") 
+    ? localStorage.getItem("Category") : "" );
+    const [product, setProduct] = useState(localStorage.getItem("Product")
+    ? localStorage.getItem("Product") : "");
 
     useEffect(() => {
         axios('https://dummyjson.com/products')
@@ -22,6 +24,8 @@ const ProductProvider =  ({children}) => {
         productCategories,
         category,
         setCategory,
+        product,
+        setProduct,
     }
     return (
         <ProductsContext.Provider value={values}>{children}</ProductsContext.Provider>

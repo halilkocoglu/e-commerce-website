@@ -3,7 +3,7 @@ import { useProductsContext } from '../../context/productsContext/ProductsContex
 import { Link } from 'react-router-dom';
 import "./productsList.css"
 function Products() {
-    const { productsData } = useProductsContext();
+    const { productsData, setProduct } = useProductsContext();
   return (
     <div>
         <div className='main-products'>
@@ -12,9 +12,14 @@ function Products() {
                 return(
                     <div key={product.id} >
                         <div className='product-card'>
-                            <Link to={`/products/category/${product.category}/${(product.title).replaceAll(" ","-")}`}>
+                            <Link 
+                            onClick={ () => {
+                                setProduct(product.id);
+                                localStorage.setItem("Product",product.id);
+                            }}
+                            to={`/products/${product.id}`}>
                                 <div className='product-card-img'>
-                                    <img src= {product.images[0]} alt= {product.title} />
+                                    <img src= {product.thumbnail} alt= {product.id} />
                                 </div>
                                 <div className='product-card-title'>
                                     {product.title}

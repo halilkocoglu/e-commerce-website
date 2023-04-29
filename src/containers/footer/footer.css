@@ -2,9 +2,11 @@
     display: flex;
     width: 100%;
     background-color: #f1f1f1;
-    margin-top: 10vw;
     justify-content: space-evenly;
     align-items: flex-start;
     color: black;
-    padding: 2rem;
+    padding: 1rem;
+    bottom: 0;
+    position:absolute ;
+    
 }

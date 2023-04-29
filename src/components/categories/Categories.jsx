@@ -11,7 +11,10 @@ function Categories() {
             productCategories.map((categoryItem,index) => {
                 return(
                     <div key={index} className='header-categories-item'>
-                        <Link  onClick={() => setCategory(categoryItem)} to={`/products/category/${categoryItem}`} >{categoryItem}</Link>
+                        <Link  onClick={() => {
+                            setCategory(categoryItem);
+                            localStorage.setItem("Category",categoryItem)
+                            }} to={`/products/category/${categoryItem}`} >{categoryItem}</Link>
                     </div>
                 )
                 
