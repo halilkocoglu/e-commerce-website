@@ -1,25 +1,33 @@
 import React from 'react'
+
+import "../productsList/productsList.css"
 import { useProductsContext } from '../../context/productsContext/ProductsContext';
 import { Link } from 'react-router-dom';
-import "./productsList.css"
-function Products() {
-    const { productsData, setProduct } = useProductsContext();
+
+
+
+
+function SelectedCategory() {
+    const { productsData, category ,setProduct } = useProductsContext();
   return (
-    <div>
+    <div className='main-container'>
         <div className='main-products'>
             {
             productsData.map(( product ) => {
+                
                 return(
+                    
+                    product.category === category &&
                     <div key={product.id} >
                         <div className='product-card'>
-                            <Link 
+                            <Link  
                             onClick={ () => {
                                 setProduct(product.id);
                                 localStorage.setItem("Product",product.id);
                             }}
                             to={`/products/${product.id}`}>
                                 <div className='product-card-img'>
-                                    <img src= {product.thumbnail} alt= {product.id} />
+                                    <img src= {product.thumbnail} alt= {product.title} />
                                 </div>
                                 <div className='product-card-title'>
                                     {product.title}
@@ -36,12 +44,13 @@ function Products() {
                         </div>
                             
                     </div>
+                    )}
                 )
-            })
             }
+            
         </div>
     </div>
   )
 }
 
-export default Products
+export default SelectedCategory

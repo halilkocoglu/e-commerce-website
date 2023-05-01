@@ -4,14 +4,17 @@ import "./categories.css"
 import { Link } from 'react-router-dom';
 
 function Categories() {
-    const {productCategories } = useProductsContext();
+    const {productCategories, setCategory } = useProductsContext();
   return (
     <div className='header-categories'>
         {
-            productCategories.map((category,index) => {
+            productCategories.map((categoryItem,index) => {
                 return(
                     <div key={index} className='header-categories-item'>
-                        <Link to={`/prodcuts/${category}`} >{category}</Link>
+                        <Link  onClick={() => {
+                            setCategory(categoryItem);
+                            localStorage.setItem("Category",categoryItem)
+                            }} to={`/products/category/${categoryItem}`} >{categoryItem}</Link>
                     </div>
                 )
                 
